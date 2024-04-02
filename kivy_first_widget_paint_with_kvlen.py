@@ -1,12 +1,18 @@
+# importando os necessários para pegar o caminho atual
+from os.path import abspath, sep
 from random import randint, random
 
 from kivy import require
 from kivy.app import App
 from kivy.graphics import Color, Ellipse, Line
+from kivy.lang import \
+    Builder  # aqui importamos a classe Builder para mudar o diretório do .kv e não o objeto!
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 
 require("2.3.0")
+             # o arquivo .kv por padrão é o seu nome sem APP e em minusculo, na mesma pasta, mas isso é desorganizado!
+
 
 class MyPaintWidget(Widget):
     def on_touch_down(self, touch):
@@ -26,6 +32,7 @@ class MyPaintWidget(Widget):
         # print(touch.ud['line'].points)
 
 class MyPaintApp(App):
+    Builder.load_file(abspath(".")+sep+"kv_files"+sep+"mypaint.kv")
     def build(self):
         parent = Widget()  # definindo um widget pai
         self.painter = MyPaintWidget()  # instanciando o widget mypaint.
@@ -36,7 +43,7 @@ class MyPaintApp(App):
         return parent
 
     def clear_canvas(self, obj):  # não sei pq diabos o bind envia ele mesmo como objeto.
-        print(obj)
+        # print(obj)
         self.painter.canvas.clear()    # limpa os elementos feitos em canvas
 
 

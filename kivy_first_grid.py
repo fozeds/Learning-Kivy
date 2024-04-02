@@ -1,8 +1,10 @@
+from kivy import require
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 
+require("2.3.0")
 
 class LoginScreen(GridLayout):  # classe do grid
 
